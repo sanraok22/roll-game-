@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Dice Roller</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Task Dice Roller</h1>
+            <p>Roll the dice to get your assigned task!</p>
+        </header>
+
+        <main>
+            <div class="dice-container">
+                <div class="dice" id="dice">
+                    <div class="face front"></div>
+                    <div class="face back"></div>
+                    <div class="face right"></div>
+                    <div class="face left"></div>
+                    <div class="face top"></div>
+                    <div class="face bottom"></div>
+                </div>
+            </div>
+
+            <button id="rollBtn" class="roll-btn">ROLL DICE</button>
+
+            <div class="task-display" id="taskDisplay">
+                <span id="taskText">Press Roll to Start!</span>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+:root {
+    --primary-color: #6366f1;
+    --background-color: #0f172a;
+    --card-bg: #1e293b;
+    --text-color: #f8fafc;
+    --dice-color: #ffffff;
+    --dot-color: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #a5b4fc, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header p {
+    color: #94a3b8;
+    margin-bottom: 2rem;
+}
+
+/* Dice Container */
+.dice-container {
+    perspective: 1000px;
+    width: 150px;
+    height: 150px;
+    margin: 3rem auto;
+}
+
+.dice {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(0deg);
+    transition: transform 1s ease-out;
+}
+
+.face {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: var(--dice-color);
+    border-radius: 20px;
+    border: 2px solid #ccc;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+}
+
+/* Dots helper (using simplified background/flex for now, or pseudo-elements) */
+/* Ideally we would use specific dot layouts, but for simplicity in "just CSS/HTML", 
+   I will use flex and Unicode or simple radial gradients for dots? 
+   Actually, let's use background-image radial gradients for high quality dots.
+*/
+
+.face::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Mapping faces */
+.front  { transform: translateZ(75px); }    /* 1 */
+.back   { transform: rotateY(180deg) translateZ(75px); } /* 6 */
+.right  { transform: rotateY(90deg) translateZ(75px); }  /* 3 */
+.left   { transform: rotateY(-90deg) translateZ(75px); } /* 4 */
+.top    { transform: rotateX(90deg) translateZ(75px); }  /* 5 */
+.bottom { transform: rotateX(-90deg) translateZ(75px); } /* 2 */
+
+/* Dots using radial-gradients */
+/* 1 */
+.front { 
+    background-image: radial-gradient(circle at center, var(--dot-color) 12px, transparent 13px);
+    background-color: var(--dice-color);
+}
+/* 6 */
+.back {
+    background-image: 
+        radial-gradient(circle at 35px 35px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 35px 75px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 35px 115px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 115px 35px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 115px 75px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 115px 115px, var(--dot-color) 12px, transparent 13px);
+    background-color: var(--dice-color);
+}
+/* 2 */
+.bottom {
+    background-image: 
+        radial-gradient(circle at 35px 35px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 115px 115px, var(--dot-color) 12px, transparent 13px);
+    background-color: var(--dice-color);
+}
+/* 5 */
+.top {
+    background-image: 
+        radial-gradient(circle at 35px 35px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 115px 35px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 35px 115px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 115px 115px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 75px 75px, var(--dot-color) 12px, transparent 13px);
+    background-color: var(--dice-color);
+}
+/* 3 */
+.right {
+    background-image: 
+        radial-gradient(circle at 35px 35px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 75px 75px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 115px 115px, var(--dot-color) 12px, transparent 13px);
+    background-color: var(--dice-color);
+}
+/* 4 */
+.left {
+    background-image: 
+        radial-gradient(circle at 35px 35px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 115px 35px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 35px 115px, var(--dot-color) 12px, transparent 13px),
+        radial-gradient(circle at 115px 115px, var(--dot-color) 12px, transparent 13px);
+    background-color: var(--dice-color);
+}
+
+
+.roll-btn {
+    background: linear-gradient(135deg, #6366f1, #818cf8);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 1px;
+}
+
+.roll-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+}
+
+.roll-btn:active {
+    transform: translateY(1px);
+}
+.roll-btn:disabled {
+    background: #475569;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.task-display {
+    margin-top: 2rem;
+    min-height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#taskText {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #e2e8f0;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Rolling animation class */
+.rolling {
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    25% { transform: rotateX(10deg) rotateY(10deg); }
+    50% { transform: rotateX(-10deg) rotateY(-10deg); }
+    75% { transform: rotateX(10deg) rotateY(-10deg); }
+    100% { transform: rotateX(-10deg) rotateY(10deg); }
+}
